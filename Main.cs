@@ -3,6 +3,7 @@ namespace TP2;
 
 public static class Program
 { 
+    private static readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
     public static void Main(string[] args)
     {
         Alumno a1;
@@ -51,20 +52,23 @@ public static class Program
         }
         catch (FormatException)
         {
-            Console.WriteLine("Error de formato!");
+            Logger.Error("Error de formato!");
         }
         catch (OverflowException)
         {
-            Console.WriteLine("Error de representacion!");
+            Logger.Error("Error de representacion!");
         }
         catch(FileNotFoundException)
         {
-            Console.WriteLine("Error archivo no encontrado!");
+            Logger.Error("Error archivo no encontrado!");
         }
         catch (Exception e)
         {
-            Console.WriteLine("Exception encontrada! ", e);
+            Logger.Error("Exception encontrada! ", e);
         }
+
+        NLog.LogManager.Shutdown();
+
     }
 
     static string Get_Route(Alumno a0)
